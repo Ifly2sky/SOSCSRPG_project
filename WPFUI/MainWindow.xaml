@@ -136,10 +136,11 @@
         <Grid Grid.Row="2" Grid.Column="0" Background="BurlyWood">
             <TabControl>
                 <TabItem Header="Inventory">
-                    <DataGrid ItemsSource="{Binding CurrentPlayer.Inventory}" AutoGenerateColumns="False" HeadersVisibility="Column">
+                    <DataGrid ItemsSource="{Binding CurrentPlayer.GroupedInventory}" AutoGenerateColumns="False" HeadersVisibility="Column">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Description" Binding="{Binding Name}" Width="*"/>
-                            <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="Auto"/>
+                            <DataGridTextColumn Header="Description" Binding="{Binding Item.Name}" Width="*"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="Qty" Binding="{Binding Quantity}" Width="Auto"/>
+                            <DataGridTextColumn Header="Price" Binding="{Binding Item.Price}" Width="Auto"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>
