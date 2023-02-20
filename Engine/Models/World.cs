@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
+﻿using System.Collections.Generic;
 
 namespace Engine.Models
 {
@@ -14,25 +8,19 @@ namespace Engine.Models
 
         internal void AddLocation(int xCoordinate, int yCoordinate, string name, string description, string imageName)
         {
-            Location loc = new Location();
-            loc.XCoordinate = xCoordinate;
-            loc.YCoordinate = yCoordinate;
-            loc.Name = name;
-            loc.Description = description;
-            loc.ImageName = $"/Engine;component/Images/Locations/{imageName}";
-            _locations.Add(loc);
+            _locations.Add(new Location(xCoordinate, yCoordinate, name, description, $"/Engine;component/Images/Locations/{imageName}"));
         }
 
-        public Location LocationAt(int xCoordinate, int yCoordinate)
+    public Location LocationAt(int xCoordinate, int yCoordinate)
+    {
+        foreach (Location loc in _locations)
         {
-            foreach(Location loc in _locations)
+            if (loc.XCoordinate == xCoordinate && loc.YCoordinate == yCoordinate)
             {
-                if(loc.XCoordinate == xCoordinate && loc.YCoordinate == yCoordinate) 
-                { 
-                    return loc; 
-                }
+                return loc;
             }
-            return null;
         }
+        return null;
     }
+}
 }

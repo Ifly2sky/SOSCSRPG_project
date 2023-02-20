@@ -15,7 +15,7 @@ namespace Engine.ViewModels
         private Location _currentLocation;
         private Monster _currentMonster;
         private Trader _currentTrader;
-        public World CurrentWorld { get; set; }
+        public World CurrentWorld { get; }
         public Player CurrentPlayer 
         { 
             get { return _currentPlayer; }
@@ -44,7 +44,7 @@ namespace Engine.ViewModels
             set 
             { 
                 _currentLocation = value;
-                OnPropertyChanged(nameof(CurrentLocation));
+                OnPropertyChanged();
                 OnPropertyChanged(nameof(HasLocationToNorth));
                 OnPropertyChanged(nameof(HasLocationToEast));
                 OnPropertyChanged(nameof(HasLocationToWest));
@@ -73,7 +73,7 @@ namespace Engine.ViewModels
                     RaiseMessage("");
                     RaiseMessage($"You see a {CurrentMonster.Name} here!");
                 }
-                OnPropertyChanged(nameof(CurrentMonster));
+                OnPropertyChanged();
                 OnPropertyChanged(nameof(HasMonster));
             }
         }
@@ -84,7 +84,7 @@ namespace Engine.ViewModels
             {
                 _currentTrader = value;
 
-                OnPropertyChanged(nameof(CurrentTrader));
+                OnPropertyChanged();
                 OnPropertyChanged(nameof(HasTrader));
             }
         }
@@ -255,8 +255,8 @@ namespace Engine.ViewModels
             RaiseMessage($"You defeated the {CurrentMonster.Name}!");
             RaiseMessage($"You receive {CurrentMonster.RewardExperiencePoints} experience points.");
             CurrentPlayer.AddExperience(CurrentMonster.RewardExperiencePoints);
-            RaiseMessage($"You receive {CurrentMonster.RewardGold} gold.");
-            CurrentPlayer.ReceiveGold(CurrentMonster.RewardGold);
+            RaiseMessage($"You receive {CurrentMonster.Gold} gold.");
+            CurrentPlayer.ReceiveGold(CurrentMonster.Gold);
             foreach (GameItem gameItem in CurrentMonster.Inventory)
             {
                 RaiseMessage($"You receive one {gameItem.Name}.");

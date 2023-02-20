@@ -9,24 +9,10 @@ namespace Engine.Models
 {
     public class Monster:LivingEntity
     {
-        private int _hitPoints;
-        public string ImageName { get; set; }
-        public int HitPoints
-        {
-            get
-            {
-                return _hitPoints;
-            }
-            set
-            {
-                _hitPoints = value;
-                OnPropertyChanged(nameof(HitPoints));
-            }
-        }
-        public int MinimumDamage { get; set; }
-        public int MaximumDamage { get; set; }
-        public int RewardExperiencePoints { get; private set; }
-        public int RewardGold { get; private set; }
+        public string ImageName { get; }
+        public int MinimumDamage { get; }
+        public int MaximumDamage { get; }
+        public int RewardExperiencePoints { get; }
         public Monster(string name, string imageName, int maximumHitPoints, int currentHitPoints, int minimumDamage, int maximumDamage, int rewardExperiencePoints, int gold):base(name, maximumHitPoints, currentHitPoints, gold)
         {
             ImageName = $"/Engine;component/Images/Monsters/{imageName}";
