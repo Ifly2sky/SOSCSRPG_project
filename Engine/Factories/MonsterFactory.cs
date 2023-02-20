@@ -1,6 +1,5 @@
-﻿using Engine.Models;
-using System;
-
+﻿using System;
+using Engine.Models;
 namespace Engine.Factories
 {
     public static class MonsterFactory
@@ -31,11 +30,11 @@ namespace Engine.Factories
                     throw new ArgumentException(string.Format("MonsterType '{0}' does not exist", monsterID));
             }
         }
-        public static void AddLootItem(Monster monster, int ItemID, int percentage)
+        private static void AddLootItem(Monster monster, int itemID, int percentage)
         {
-            if(RandomNumberGenerator.NumberBetween(1, 100) <= percentage)
+            if (RandomNumberGenerator.NumberBetween(1, 100) <= percentage)
             {
-                monster.Inventory.Add(new ItemQuantity(ItemID, 1));
+                monster.AddItemToInventory(ItemFactory.CreateGameItem(itemID));
             }
         }
     }
