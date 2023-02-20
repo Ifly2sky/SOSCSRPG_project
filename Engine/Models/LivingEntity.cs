@@ -10,6 +10,7 @@ namespace Engine.Models
         private string _name;
         private int _currentHitPoints;
         private int _maximumHitPoints;
+        private int _level;
         private int _gold;
         public string Name
         {
@@ -32,10 +33,19 @@ namespace Engine.Models
         public int MaximumHitPoints
         {
             get { return _maximumHitPoints; }
-            private set
+            protected set
             {
                 _maximumHitPoints = value;
                 OnPropertyChanged(nameof(MaximumHitPoints));
+            }
+        }
+        public int Level
+        {
+            get { return _level; }
+            protected set
+            {
+                _level = value;
+                OnPropertyChanged(nameof(Level));
             }
         }
         public int Gold
@@ -54,11 +64,12 @@ namespace Engine.Models
         public bool IsDead => CurrentHitPoints <= 0;
         #endregion
         public event EventHandler OnKilled;
-        protected LivingEntity(string name, int maximumHitPoints, int currentHitPoints, int gold)
+        protected LivingEntity(string name, int maximumHitPoints, int currentHitPoints, int gold, int level = 1)
         {
             Name = name;
             MaximumHitPoints = maximumHitPoints;
             CurrentHitPoints = currentHitPoints;
+            Level = level;
             Gold = gold;
             Inventory = new ObservableCollection<GameItem>();
             GroupedInventory = new ObservableCollection<GroupedInventoryItem>();
