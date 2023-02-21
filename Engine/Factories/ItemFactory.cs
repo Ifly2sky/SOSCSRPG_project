@@ -1,4 +1,5 @@
-﻿using Engine.Models;
+﻿using Engine.Actions;
+using Engine.Models;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -28,7 +29,9 @@ namespace Engine.Factories
         }
         private static void BuildWeapon(int id, string name, int price, int minDamage, int maxDamage)
         {
-            _standardGameItems.Add(new GameItem(GameItem.ItemCategory.Weapon, id, name, price, true, minDamage, maxDamage));
+            GameItem weapon = new GameItem(GameItem.ItemCategory.Weapon, id, name, price, true);
+            weapon.Action = new AttackWithWeapon(weapon, maxDamage, minDamage);
+            _standardGameItems.Add(weapon);
         }
     }
 }
