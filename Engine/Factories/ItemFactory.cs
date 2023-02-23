@@ -2,6 +2,7 @@
 using Engine.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 
 namespace Engine.Factories
 {
@@ -45,6 +46,10 @@ namespace Engine.Factories
             GameItem item = new GameItem(GameItem.ItemCategory.Consumable, id, name, price);
             item.Action = new Heal(item, hitPointsToHeal);
             _standardGameItems.Add(item);
+        }
+        public static string ItemName(int itemTypeID)
+        {
+            return _standardGameItems.FirstOrDefault(x => x.ItemTypeID == itemTypeID)?.Name ?? "";
         }
     }
 }
