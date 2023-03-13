@@ -7,12 +7,13 @@ namespace Engine.ViewModels
     public class GameSession : BaseNotificationClass
     {
         private readonly MessageBroker _messageBroker = MessageBroker.GetInstance();
-        private Battle _currentBattle;
         #region Properties
         private Player _currentPlayer;
         private Location _currentLocation;
+        private Battle _currentBattle;
         private Monster _currentMonster;
         private Trader _currentTrader;
+        public string Version { get; } = "0.1.000";
         public World CurrentWorld { get; }
         public Player CurrentPlayer
         {
@@ -92,6 +93,7 @@ namespace Engine.ViewModels
         #endregion
         public GameSession()
         {
+            CurrentWorld = WorldFactory.CreateWorld();
             int dexterity = RandomNumberGenerator.NumberBetween(3, 18);
             CurrentPlayer = new Player("Scott", "Fighter", 0, 10, 10, dexterity, 1000000);
             if (!CurrentPlayer.Inventory.Weapons.Any())
@@ -103,8 +105,13 @@ namespace Engine.ViewModels
             CurrentPlayer.AddItemToInventory(ItemFactory.CreateGameItem(3001));
             CurrentPlayer.AddItemToInventory(ItemFactory.CreateGameItem(3002));
             CurrentPlayer.AddItemToInventory(ItemFactory.CreateGameItem(3003));
-            CurrentWorld = WorldFactory.CreateWorld();
             CurrentLocation = CurrentWorld.LocationAt(0, 0);
+        }
+        public GameSession(Player player, int xCoordinate, int yCoordinate)
+        {
+            CurrentWorld = WorldFactory.CreateWorld();
+            CurrentPlayer = player;
+            CurrentLocation = CurrentWorld.LocationAt(xCoordinate, yCoordinate);
         }
         public void MoveNorth()
         {
