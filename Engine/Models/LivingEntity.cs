@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Engine.Services;
+using Newtonsoft.Json;
+
 namespace Engine.Models
 {
     public abstract class LivingEntity : BaseNotificationClass
@@ -112,7 +114,9 @@ namespace Engine.Models
                 OnPropertyChanged();
             }
         }
+        [JsonIgnore]
         public bool IsAlive => CurrentHitPoints > 0;
+        [JsonIgnore]
         public bool IsDead => !IsAlive;
         #endregion
         public event EventHandler<string> OnActionPerformed;
